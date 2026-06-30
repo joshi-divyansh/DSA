@@ -12,7 +12,7 @@ public:
             int current_area = current_width * current_height;
             
             
-            max_water = std::max(max_water, current_area);
+            max_water = max(max_water, current_area);
             
             
             if (height[left] < height[right]) {
