@@ -26,5 +26,6 @@ public:
     
        return head;
        delete slow;
+       delete fast;
     }
 };
