@@ -23,7 +23,8 @@ public:
             fast=fast->next;
         }
        slow->next=slow->next->next;
+    
        return head;
-
+       delete slow;
     }
 };
