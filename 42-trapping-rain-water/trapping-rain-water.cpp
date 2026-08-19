@@ -1,26 +1,20 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-       int left = 0, right = height.size() - 1;
-        int maxLeft = 0, maxRight = 0;
+      stack<int> st;
         int totalWater = 0;
 
-        while (left < right) {
-            if (height[left] <= height[right]) {
-                if (height[left] >= maxLeft) {
-                    maxLeft = height[left];
-                } else {
-                    totalWater += maxLeft - height[left];
-                }
-                left++;
-            } else {
-                if (height[right] >= maxRight) {
-                    maxRight = height[right];
-                } else {
-                    totalWater += maxRight - height[right];
-                }
-                right--;
+        for (int i = 0; i < height.size(); ++i) {
+            while (!st.empty() && height[i] > height[st.top()]) {
+                int top = st.top();
+                st.pop();
+                if (st.empty()) break;
+
+                int distance = i - st.top() - 1;
+                int boundedHeight = std::min(height[i], height[st.top()]) - height[top];
+                totalWater += distance * boundedHeight;
             }
+            st.push(i);
         }
 
         return totalWater; 
